@@ -14,7 +14,6 @@ int matInv(vector<vector<double>>& A) {
 	int n = sz(A); vi col(n);
 	vector<vector<double>> tmp(n, vector<double>(n));
 	rep(i,0,n) tmp[i][i] = 1, col[i] = i;
-
 	rep(i,0,n) {
 		int r = i, c = i;
 		rep(j,i,n) rep(k,i,n)
@@ -36,13 +35,11 @@ int matInv(vector<vector<double>>& A) {
 		rep(j,0,n) tmp[i][j] /= v;
 		A[i][i] = 1;
 	}
-
 	/// forget A at this point, just eliminate tmp backward
 	for (int i = n-1; i > 0; --i) rep(j,0,i) {
 		double v = A[j][i];
 		rep(k,0,n) tmp[j][k] -= v*tmp[i][k];
 	}
-
 	rep(i,0,n) rep(j,0,n) A[col[i]][col[j]] = tmp[i][j];
 	return n;
 }
