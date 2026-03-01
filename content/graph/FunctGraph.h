@@ -10,12 +10,11 @@ struct FunctGraph{
 	int n;
 	vi head, comp;
 	vector<vi> gr, cycles;
-	
 	FunctGraph(vi& fn):
 		n(sz(fn)), head(n, -1), comp(n), gr(n) {
 		rep(i, 0, n)gr[fn[i]].pb(i);
 		vi visited(n, 0);
-		auto dfs = [&](auto rec, int v, int c) -> void{
+		auto dfs = [&](auto rec, int v, int c) -> void {
 			head[v] = c; visited[v] = 1;
 			for(int f : gr[v])if (head[f]!=f)rec(rec, f, c);
 		};

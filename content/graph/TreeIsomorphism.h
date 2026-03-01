@@ -7,15 +7,12 @@
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 uniform_int_distribution<ll> dist(0, (ll)1e18);
-
 const int mxH = 2; // How many random numbers to use as a Hash
 using Hash = array<ll, mxH>;
 using UHash = pair<Hash, Hash>;
-
 struct TreeHasher{
 	map<vector<Hash>, Hash> table;
 	using Tree = vector<vector<int>>;
-
 	void calc_sz(int a, int p, const Tree & g, vector<int> & tam) {
 		tam[a] = 1;
 		for (int b: g[a]) if (b != p) {

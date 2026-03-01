@@ -12,7 +12,6 @@ vector<pair<int, int>> edges;
 vi tin, st, bridges;
 int dfstime = 0;
 vector<vi> twocc;
-
 int dfs(int a, int p) {
   int top = tin[a] = ++dfstime;
   int si = st.size();
@@ -31,13 +30,11 @@ int dfs(int a, int p) {
   }
   return top;
 }
-
 void twocomps() {
 	int n = sz(g);
   tin.assign(n, 0);
 	rep(i, 0, n) if (!tin[i]) dfs(i, -1);
 }
-
 vi comp;
 vector<vi> tree;
 void build_tree() { // Optional

@@ -12,7 +12,6 @@ class MaximumMatching {
    public:
     struct Edge {int from, to;};
     static constexpr int Inf = 1 << 30;
- 
    private:
     enum Label {
         kInner = -1,  // should be < 0

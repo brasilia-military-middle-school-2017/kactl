@@ -19,7 +19,6 @@ vector<vector<pair<int, int>>> g; // [b, edge idx]
 vi tin, st, art;
 int dfstime = 0;
 vector<vi> bcc;
-
 int dfs(int a, int p) {
 	int top = tin[a] = ++dfstime;
 	bool child = (p != -1);
@@ -45,13 +44,11 @@ int dfs(int a, int p) {
 	}
 	return top;
 }
-
 void bicomps() {
 	int n = sz(g);
 	tin.assign(n, 0), art.assign(n, 0);
 	rep(i,0,n) if (!tin[i]) dfs(i, -1);
 }
-
 vi comp;
 vector<vi> tree;
 void build_tree() { // Optional

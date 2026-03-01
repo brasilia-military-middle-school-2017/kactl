@@ -12,15 +12,9 @@ struct OnlineMatching {
     vector<vector<int>> g;
 	vector<int> last;
 	int t = 0;
-
-    OnlineMatching(int n_, int m_) : n(n_), m(m_),
-		vis(n, 0), match(m, -1), dist(n, n+1), g(n), last(n, -1)
-		{}
-
-    void add(int a, int b) {
-        g[a].pb(b);
-    }
-
+    OnlineMatching(int n_, int m_) : n(n_), m(m_), vis(n, 0), 
+		match(m, -1), dist(n, n+1), g(n), last(n, -1) {}
+    void add(int a, int b) { g[a].pb(b); }
     bool kuhn(int a) {
 		vis[a] = t;
 		for(int b: g[a]) {
