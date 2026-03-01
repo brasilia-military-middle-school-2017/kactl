@@ -21,6 +21,7 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage[normalem]{ulem}
 \usepackage[hidelinks]{hyperref}        % For clickable table of contents
+\usepackage{needspace}
 
 % Config commands
 \newcommand{\subtitle}[1]{
@@ -248,15 +249,15 @@
 }
 
 % Like \needspace, except with flush bottoms.
-\newcommand{\myneedspace}[1]{%
-  \begingroup
-    \setlength{\dimen@}{#1}%
-    \vskip\dimen@
-    \penalty 9999%
-    \vskip -\dimen@
-    \vskip\z@skip
-  \endgroup
-}
+%\newcommand{\myneedspace}[1]{%
+  %\begingroup
+   % \setlength{\dimen@}{#1}%
+   % \vskip\dimen@
+   % \penalty 9999%
+   % \vskip -\dimen@
+   % \vskip\z@skip
+  %\endgroup
+%}
 
 \newcommand{\kactlimport}[2][]{ % Using empty default parameter
 	\leftcaption{}\rightcaption{}
@@ -265,9 +266,11 @@
 	\setboolean{hastime}{false}
 	\setboolean{hasmemory}{false}
 	\setboolean{hasleftcaption}{false}
-	\myneedspace{3\baselineskip}
+	\needspace{3\baselineskip}
 	\penalty-100
-	{\large #2}
+	\vspace{1ex} % Add a little padding above the filename
+	{\noindent\large\textbf{#2}\par} % \par forces a clean break before the code!
+	\vspace{-0.5ex} % Tighten the gap before the description/code starts
 	\immediate\write18{rm -f \@builddir/kactl.tmp} % Don't include old kactl.tmp on failure.
 	\immediate\write18{python3 content/tex/preprocessor.py -i "\@kactldir/#2" -o \@builddir/kactl.tmp #1}
 	\immediate\input{\@builddir/kactl.tmp}
