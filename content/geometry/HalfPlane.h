@@ -5,7 +5,7 @@
  * Source: https://cp-algorithms.com/geometry/halfplane-intersection.html
  * Description: Calculates the halfplane intersection of Halfplanes, Halfplanes allow everything to the left. 
  * Cuidado com a precisao
- * Time: $O(N+M)$
+ * Time: $O(N \log(N)$
  * Status: stress-tested, Submitted on https://codeforces.com/gym/104736/problem/H
  */
 #pragma once
