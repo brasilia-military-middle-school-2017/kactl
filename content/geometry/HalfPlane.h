@@ -27,7 +27,6 @@ struct HP {
         return s.p + (s.pq * alpha);
     }
 };
-
 vector<P> hp_intersect(vector<HP> &H) {
     P box[4] = {
         P(INF, INF),

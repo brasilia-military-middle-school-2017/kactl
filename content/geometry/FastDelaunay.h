@@ -20,7 +20,6 @@ typedef Point<ll> P;
 typedef struct Quad* Q;
 typedef __int128_t lll; // (can be ll if coords are < 2e4)
 P arb(LLONG_MAX,LLONG_MAX); // not equal to any other point
-
 struct Quad {
 	Q rot, o; P p = arb; bool mark;
 	P& F() { return r()->p; }
@@ -28,7 +27,6 @@ struct Quad {
 	Q prev() { return rot->o->rot; }
 	Q next() { return r()->prev(); }
 } *H;
-
 bool circ(P p, P a, P b, P c) { // is p in the circumcircle?
 	lll p2 = p.dist2(), A = a.dist2()-p2,
 	    B = b.dist2()-p2, C = c.dist2()-p2;
@@ -50,7 +48,6 @@ Q connect(Q a, Q b) {
 	splice(q->r(), b);
 	return q;
 }
-
 pair<Q,Q> rec(const vector<P>& s) {
 	if (sz(s) <= 3) {
 		Q a = makeEdge(s[0], s[1]), b = makeEdge(s[1], s.back());
@@ -60,7 +57,6 @@ pair<Q,Q> rec(const vector<P>& s) {
 		Q c = side ? connect(b, a) : 0;
 		return {side < 0 ? c->r() : a, side < 0 ? c : b->r() };
 	}
-
 #define H(e) e->F(), e->p
 #define valid(e) (e->F().cross(H(base)) > 0)
 	Q A, B, ra, rb;
@@ -72,7 +68,6 @@ pair<Q,Q> rec(const vector<P>& s) {
 	Q base = connect(B->r(), A);
 	if (A->p == ra->p) ra = base->r();
 	if (B->p == rb->p) rb = base;
-
 #define DEL(e, init, dir) Q e = init->dir; if (valid(e)) \
 		while (circ(e->dir->F(), H(base), e->F())) { \
 			Q t = e->dir; \
@@ -90,7 +85,6 @@ pair<Q,Q> rec(const vector<P>& s) {
 	}
 	return { ra, rb };
 }
-
 vector<P> triangulate(vector<P> pts) {
 	sort(all(pts));  assert(unique(all(pts)) == pts.end());
 	if (sz(pts) < 2) return {};

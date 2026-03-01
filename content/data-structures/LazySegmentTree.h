@@ -1,6 +1,6 @@
 /**
  * Author: Arthur Botelho
- * Description: Lazy Seg (half-open). Can be transformed into Seg Beats by uncommenting conditions.
+ * Description: Lazy Seg (half-open), N must be a power of 2. Can be transformed into Seg Beats by uncommenting conditions.
  * Time: O(\log N * (ch + cmp)).
  * Status: lazy tested
  */

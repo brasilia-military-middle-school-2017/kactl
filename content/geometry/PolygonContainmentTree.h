@@ -40,7 +40,7 @@ vector<int> build(vector<vector<P>>& polygons) {
 			if (not vis[i]) {
 				vis[i] = true;
 				auto it = s.upper_bound(seg);
-				if (it == s.end())pai[i] = n+q;
+				if (it == s.end())pai[i] = n;
 				else if (it->is_upper)pai[i] = it->idx;
 				else pai[i] = pai[it->idx];
 			}

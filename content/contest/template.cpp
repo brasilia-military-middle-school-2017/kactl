@@ -8,6 +8,7 @@ using namespace std;
 #define eb emplace_back
 #define debug(x...) cout<<"["#x"]: ",[](auto...$){((cout<<$<<"; "),...);}(x),cout<<endl
 typedef long long ll;
+typedef long double ld;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 template<class T> auto& operator<<(ostream& o, vector<T> v){

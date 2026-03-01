@@ -34,7 +34,6 @@ template <class P> int extrVertex(vector<P>& poly, P dir) {
 	}
 	return lo;
 }
-
 #define cmpL(i) sgn(a.cross(poly[i], b))
 template <class P>
 array<int, 2> lineHull(P a, P b, vector<P>& poly) {
