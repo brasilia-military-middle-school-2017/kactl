@@ -19,7 +19,7 @@ struct HLD {
 	vector<vi> g;
 	vi p,siz,hd,ti;
 	SegBeats<S> seg, segi;
-	HLD(vector<vi> ag) : n(sz(ag)), g(ag), p(n), siz(n), hd(n), ti(n),
+	HLD(vector<vi> ag) : n(sz(ag)), g(ag), p(n), siz(n,1), hd(n), ti(n),
 	seg(bit_ceil((unsigned)n)), segi(bit_ceil((unsigned)n)) { dfs(0); dfs2(0);}
 	void dfs(int v) {
 		for (int& u : g[v]) {
