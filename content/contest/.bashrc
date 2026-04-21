@@ -1,4 +1,3 @@
-# Makefile: "CXXFLAGS := -std=c++20 -Wall -Wextra -Wshadow -Wconversion -fsanitize=address,undefined -g3"
 teste() {
     for f in "$2"/*; do
         echo "=== $f"
@@ -11,7 +10,7 @@ teste() {
 stress() {
     for ((i=1; ; i++)) do
         echo "Test $i"
-        $1 > gen_in
+        echo $i | $1 > gen_in
         $2 < gen_in > main_out
         $3 < gen_in > brute_out
         if ! diff -w main_out brute_out > /dev/null; then

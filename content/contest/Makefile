@@ -1,0 +1,1 @@
+CXXFLAGS := -std=c++20 -Wall -Wextra -Wshadow -Wconversion -fsanitize=address,undefined -g3
