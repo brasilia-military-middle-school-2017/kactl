@@ -1,3 +1,10 @@
+/**
+ * Author: CP-ALGO
+ * Description: Aho-Corasick
+ * Time: O(n) build
+ * Memory: O(n * 26)
+ * Status: not yet tested
+ */
 const int K = 26;
 
 struct Vertex {
