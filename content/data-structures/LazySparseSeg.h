@@ -26,7 +26,7 @@ template<class I, class S> struct LazySparseSeg{ //I is index type
 		I mx = (lx+(rx-lx)/2); v[i].ig = 1;
 		apply(v[i].lc, v[i].lz, lx, mx); apply(v[i].rc, v[i].lz, mx, rx);
 	}
-	void update(L x, I l, I r){return update(x, l, r, 1, 0, n-1);}
+	void update(L x, I l, I r){return update(x, l, r, 1, 0, n);}
 	void update(L x, I l, I r, int i, I lx, I rx){
 		if (r <= lx or rx <= l)return;
 		if (l <= lx and rx <= r)return apply(i, x, lx, rx);
@@ -35,7 +35,7 @@ template<class I, class S> struct LazySparseSeg{ //I is index type
 		update(x, l, r, lc, lx, mx); update(x, l, r, rc, mx, rx);
 		v[i].val = S::op(v[lc].val, v[rc].val);
 	} 
-	T query(I l, I r){return query(l, r, 1, 0, n-1);}
+	T query(I l, I r){return query(l, r, 1, 0, n);}
 	T query(I l, I r, int i, I lx, I rx){
 		if (r <= lx or rx <= l)return S::id;
 		if (l <= lx and rx <= r)return v[i].val;
