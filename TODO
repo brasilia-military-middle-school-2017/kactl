@@ -1,5 +1,13 @@
-- Add Link Cut Tree with Path Queries
-- Check files not included or not compiled (including HLD)
-- Remove things we don't use
-- Add missing stuff
-- Standardize implementations
+- General library:
+	- Remove things we don't use
+	- Add missing stuff
+	- Standardize implementations
+	- Update test-session and strategy.tex
+	- Remove or update troubleshoot.txt
+- Algorithms:
+	- Add Link Cut Tree with Path Queries
+	- Fix HLD with bit_ceil
+	- Fix mod sqrt compilation with modpow
+- Structure:
+	- Improve compilation (compile specific files and have it in README)
+	- Make skip_headers more public
