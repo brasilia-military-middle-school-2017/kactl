@@ -20,7 +20,8 @@ struct HLD {
 	vi p,siz,hd,ti;
 	SegBeats<S> seg, segi;
 	HLD(vector<vi> ag) : n(sz(ag)), g(ag), p(n), siz(n,1), hd(n), ti(n),
-	seg(bit_ceil((unsigned)n)), segi(bit_ceil((unsigned)n)) { dfs(0); dfs2(0);}
+	seg(n), segi(n) { dfs(0); dfs2(0);}
+	#warning fix n to be a power of two
 	void dfs(int v) {
 		for (int& u : g[v]) {
 			g[u].erase(find(all(g[u]), v));

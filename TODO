@@ -1,1 +1,5 @@
 - Add Link Cut Tree with Path Queries
+- Check files not included or not compiled (including HLD)
+- Remove things we don't use
+- Add missing stuff
+- Standardize implementations

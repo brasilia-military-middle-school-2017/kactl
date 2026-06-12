@@ -12,7 +12,6 @@
  */
 #pragma once
 
-#include "LCA.h"
 struct LCA {
   vi time;
   int lca(int a, int b) { return -1; }
