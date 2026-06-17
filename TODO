@@ -8,6 +8,7 @@
 	- Add Link Cut Tree with Path Queries
 	- Fix HLD with bit_ceil
 	- Fix mod sqrt compilation with modpow
+	- Update SegTree to Arthur's standard
 - Structure:
 	- Improve compilation (compile specific files and have it in README)
 	- Make skip_headers more public
