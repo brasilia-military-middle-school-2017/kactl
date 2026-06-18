@@ -1,14 +1,14 @@
 - General library:
 	- Remove things we don't use
 	- Add missing stuff
-	- Standardize implementations
+	- Update test status of algorithms
 	- Update test-session and strategy.tex
-	- Remove or update troubleshoot.txt
 - Algorithms:
 	- Add Link Cut Tree with Path Queries
 	- Fix HLD with bit_ceil
+	- Fix Dist for n = 1
 	- Fix mod sqrt compilation with modpow
-	- Update SegTree to Arthur's standard
+	- Standardize half or closed intervals and update/value order in range queries
 - Structure:
 	- Improve compilation (compile specific files and have it in README)
 	- Make skip_headers more public
