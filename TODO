@@ -9,6 +9,9 @@
 	- Fix Dist for n = 1
 	- Fix mod sqrt compilation with modpow
 	- Standardize half or closed intervals and update/value order in range queries
+	- Think about using Arthur's flow implementations
+	- Add other MDRQDS
+	- Add non-lazy versions of Sparse SegTrees
 - Structure:
 	- Improve compilation (compile specific files and have it in README)
 	- Make skip_headers more public
