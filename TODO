@@ -5,7 +5,7 @@
 	- Update test-session and strategy.tex
 - Algorithms:
 	- Add Link Cut Tree with Path Queries
-	- Fix HLD with bit_ceil
+	- Fix HLD with bit_ceil and root != 1
 	- Fix Dist for n = 1
 	- Fix mod sqrt compilation with modpow
 	- Standardize half or closed intervals and update/value order in range queries
@@ -13,5 +13,6 @@
 	- Add other MDRQDS
 	- Add non-lazy versions of Sparse SegTrees
 - Structure:
+	- Add time to copy each structure
 	- Improve compilation (compile specific files and have it in README)
 	- Make skip_headers more public
