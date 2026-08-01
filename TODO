@@ -1,9 +1,11 @@
 - General library:
 	- Remove things we don't use
-	- Add missing stuff
 	- Update test status of algorithms
 	- Update understanding status of algorithms
 - Algorithms:
+	- Fix suffix automaton
+	- Improve Aho
+	- Update Bellman-Ford to SPFA
 	- Add Link Cut Tree with Path Queries
 	- Fix HLD with bit_ceil and root != 1
 	- Fix Dist for n = 1
