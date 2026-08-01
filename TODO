@@ -17,5 +17,3 @@
 	- Add test session sample code
 - Structure:
 	- Add time to copy each structure
-	- Improve compilation (compile specific files and have it in README)
-	- Make skip_headers more public

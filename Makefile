@@ -9,11 +9,10 @@ help:
 	@echo "	make fast		- to build KACTL, quickly (only runs LaTeX once)"
 	@echo "	make kactl		- to build KACTL"
 	@echo "	make clean		- to clean up the build process"
-	@echo "	make test-compiles	- to test compiling all headers"
+	@echo "	make test-compiles	- to test compiling all headers, except those in scrips/skip_headers"
 	@echo "	make help		- to show this information"
 	@echo "	make showexcluded	- to show files that are not included in the doc"
 	@echo ""
-	@echo "For more information see the file 'doc/README'"
 
 fast: | build
 	$(LATEXCMD) content/kactl.tex </dev/null
@@ -32,7 +31,7 @@ build:
 	mkdir -p build/
 
 test-compiles:
-	./doc/scripts/compile-all.sh .
+	./scripts/compile-all.sh .
 
 test-session.pdf: content/test-session/test-session.tex content/test-session/chapter.tex | build
 	$(LATEXCMD) content/test-session/test-session.tex

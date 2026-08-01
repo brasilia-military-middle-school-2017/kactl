@@ -2,10 +2,10 @@
 DIR=${1:-.}
 
 # use a precompiled header for the template to improve perf
-g++ -Wall -Wextra -Wfatal-errors -Wconversion -std=c++20 -x c++-header $DIR/content/contest/template.cpp
+g++ -Wall -Wextra -Wfatal-errors -Wconversion -Wshadow -std=c++20 -x c++-header $DIR/content/contest/template.cpp
 trap "rm -f $DIR/content/contest/template.cpp.gch" EXIT
 
-SCRIPT_DIR=$DIR/doc/scripts
+SCRIPT_DIR=$DIR/scripts
 tests="$(find $DIR/content -name '*.h' | grep -vFf $SCRIPT_DIR/skip_headers)"
 echo "skipped: "
 find $DIR/content -name '*.h' | grep -Ff $SCRIPT_DIR/skip_headers

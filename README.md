@@ -31,8 +31,7 @@ For nicer alignment you might want to insert `\hardcolumnbreak`, `\columnbreak` 
 though this is usually only done before important contests, and not on the main branch.
 The algorithms that are not included in the pdf are left commented out in `chapter.tex`.
 
-To build KACTL, type `make kactl` (or `make fast`) on a \*nix machine -- this will update `kactl.pdf`.
-(Windows might work as well, but is not tested.) `doc/README` has a few more notes about this.
+To build KACTL, type `make kactl` (or `make fast`) on a \*nix machine -- this will update `kactl.pdf` (Windows might work as well, but is not tested).
 
 Also, you should take advantage of the hashing when typing in these algorithms. Each
 algorithm has a 6 character MD5 hash in the upper right. This hash can be
