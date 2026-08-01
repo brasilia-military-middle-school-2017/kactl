@@ -3,7 +3,6 @@
 	- Add missing stuff
 	- Update test status of algorithms
 	- Update understanding status of algorithms
-	- Update test-session and strategy.tex
 - Algorithms:
 	- Add Link Cut Tree with Path Queries
 	- Fix HLD with bit_ceil and root != 1
@@ -15,6 +14,7 @@
 	- Add non-lazy versions of Sparse SegTrees
 	- Make math algorithms easy to change (mod x double) (e.g. Linear Solver)
 	- Understand Manacher and Lyndon Factorization
+	- Add test session sample code
 - Structure:
 	- Add time to copy each structure
 	- Improve compilation (compile specific files and have it in README)
