@@ -6,6 +6,7 @@
 	- Fix suffix automaton
 	- Improve Aho
 	- Update Bellman-Ford to SPFA
+	- Shorten General Matching
 	- Add Link Cut Tree with Path Queries
 	- Fix HLD with bit_ceil and root != 1
 	- Fix Dist for n = 1
