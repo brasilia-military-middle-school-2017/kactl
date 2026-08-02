@@ -1,22 +1,23 @@
 - General library:
-	- Remove things we don't use
-	- Update test status of algorithms
 	- Update understanding status of algorithms
 - Algorithms:
-	- Fix suffix automaton
-	- Improve Aho
-	- Update Bellman-Ford to SPFA
-	- Shorten General Matching
-	- Add Link Cut Tree with Path Queries
-	- Fix HLD with bit_ceil and root != 1
-	- Fix Dist for n = 1
-	- Fix mod sqrt compilation with modpow
-	- Standardize half or closed intervals and update/value order in range queries
-	- Think about using Arthur's flow implementations
-	- Add other MDRQDS
-	- Add non-lazy versions of Sparse SegTrees
-	- Make math algorithms easy to change (mod x double) (e.g. Linear Solver)
-	- Understand Manacher and Lyndon Factorization
+	- DS:
+		- Standardize half or closed intervals and update/value order in range queries
+		- Fix Dist for n = 1
+		- Add other MDRQDS
+		- Add non-lazy versions of Sparse SegTrees
+	- Graph:
+		- Update Bellman-Ford to SPFA
+		- Shorten General Matching
+		- Add Link Cut Tree with Path Queries
+		- Fix HLD with bit_ceil and root != 1
+		- Think about using Arthur's flow implementations
+	- Math:
+		- Fix mod sqrt compilation with modpow
+		- Make math algorithms easy to change (mod x double) (e.g. Linear Solver)
+	- Strings:
+		- Fix suffix automaton
+		- Improve Aho
 	- Add test session sample code
 - Structure:
 	- Add time to copy each structure
