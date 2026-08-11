@@ -31,6 +31,10 @@
 	\def\@teamname{#1}
 	\def\@teammembers{#2}
 }
+% Estimated source-code typing speed, in characters per minute.
+\newcommand{\copyspeed}[1]{
+    \def\@copycpm{#1}
+}
 \newcommand{\contest}[2]{
 	\def\@contestname{#1}
 	\def\@contestdate{#2}
@@ -52,6 +56,7 @@
 \subtitle{{\tiny new}KACTL}
 \title{KTH Algorithm Competition Template Library}
 \newcommand{\PDFColor}{0}
+\copyspeed{250}
 \def\@builddir{build}
 
 \def\today{\number\year-\ifthenelse{\number\month<10}{0}{}\number\month-\ifthenelse{\number\day<10}{0}{}\number\day} % Defines \today as YYYY-MM-DD
@@ -272,7 +277,7 @@
 	{\noindent\large\textbf{#2}\par} % \par forces a clean break before the code!
 	\vspace{-0.5ex} % Tighten the gap before the description/code starts
 	\immediate\write18{rm -f \@builddir/kactl.tmp} % Don't include old kactl.tmp on failure.
-	\immediate\write18{python3 content/tex/preprocessor.py -i "\@kactldir/#2" -o \@builddir/kactl.tmp #1}
+	\immediate\write18{python3 content/tex/preprocessor.py -i "\@kactldir/#2" -o \@builddir/kactl.tmp --copy-cpm "\@copycpm" #1}
 	\immediate\input{\@builddir/kactl.tmp}
 }
 

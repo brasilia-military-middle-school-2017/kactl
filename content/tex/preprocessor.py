@@ -8,6 +8,8 @@ import sys
 import getopt
 import subprocess
 
+DEFAULT_COPY_CPM = 250.0
+
 
 def escape(input):
     input = input.replace('<', r'\ensuremath{<}')
@@ -28,6 +30,34 @@ def codeescape(input):
     input = input.replace('^', r'\ensuremath{\hat{\;}}')
     input = escape(input)
     return input
+
+def estimate_copy_seconds(source, copy_cpm):
+    if copy_cpm <= 0:
+        raise ValueError("Copy speed must be greater than zero.")
+
+    # len(source) intentionally counts line breaks as one input action.
+    # Generated hashes have not been inserted yet when this is called.
+    return 60.0 * len(source) / copy_cpm
+
+
+def format_copy_time(seconds):
+    if seconds <= 0:
+        return "0s"
+
+    # This is an estimate, so avoid fake precision.
+    # Round to the nearest "precision" seconds.
+    precision = 10
+    seconds = max(precision, int(seconds / precision + 0.5) * precision)
+
+    minutes, seconds = divmod(seconds, 60)
+
+    if minutes == 0:
+        return "%ds" % seconds
+
+    if seconds == 0:
+        return "%dm" % minutes
+
+    return "%dm%02ds" % (minutes, seconds)
 
 def ordoescape(input, esc=True):
     if esc:
@@ -94,7 +124,7 @@ def add_curly_braces_hash(source):
     hsh_source = "\n".join(hsh_lines)
     return hsh_source
 
-def processwithcomments(caption, instream, outstream, listingslang):
+def processwithcomments(caption, instream, outstream, listingslang, copy_cpm=DEFAULT_COPY_CPM):
     knowncommands = ['Author', 'Date', 'Description', 'Source', 'Time', 'Memory', 'License', 'Status', 'Usage', 'Details']
     requiredcommands = ['Author', 'Description']
     includelist = []
@@ -172,6 +202,15 @@ def processwithcomments(caption, instream, outstream, listingslang):
         nsource = nsource.rstrip() + source[end:]
     nsource = nsource.strip()
 
+    if nsource:
+        line_count = len(nsource.split("\n"))
+        copy_time = format_copy_time(
+            estimate_copy_seconds(nsource, copy_cpm)
+        )
+    else:
+        line_count = 0
+        copy_time = "0s"
+
     if listingslang in ['C++', 'Java']:
         hsh = hash_fn(nsource)
         hsh = hsh + ', '
@@ -197,7 +236,10 @@ def processwithcomments(caption, instream, outstream, listingslang):
         if includelist:
             out.append(r"\leftcaption{%s}" % pathescape(", ".join(includelist)))
         if nsource:
-            out.append(r"\rightcaption{%s%d lines}" % (hsh, len(nsource.split("\n"))))
+            out.append(
+                r"\rightcaption{%s%dL, %s}" %
+                (hsh, line_count, copy_time)
+            )
         langstr = ", language="+listingslang
         out.append(r"\begin{lstlisting}[caption={%s}%s]" % (pathescape(caption), langstr))
         out.append(nsource)
@@ -262,8 +304,9 @@ def main():
     instream = sys.stdin
     outstream = sys.stdout
     print_header_value = None
+    copy_cpm = DEFAULT_COPY_CPM
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ho:i:l:c:", ["help", "output=", "input=", "language=", "caption=", "print-header="])
+        opts, args = getopt.getopt(sys.argv[1:], "ho:i:l:c:", ["help", "output=", "input=", "language=", "caption=", "print-header=", "copy-cpm="])
         for option, value in opts:
             if option in ("-h", "--help"):
                 print("This is the help section for this program")
@@ -274,6 +317,7 @@ def main():
                 print("\t -i --input")
                 print("\t -l --language")
                 print("\t --print-header")
+                print("\t --copy-cpm")
                 return
             if option in ("-o", "--output"):
                 outstream = open(value, "w")
@@ -289,14 +333,18 @@ def main():
                 caption = value
             if option == "--print-header":
                 print_header_value = value
+            if option == "--copy-cpm":
+                copy_cpm = float(value)
         if print_header_value is not None:
             print_header(print_header_value, outstream)
             return
+        if copy_cpm <= 0:
+            raise ValueError("Copy speed must be greater than zero.")
         print(" * \x1b[1m{}\x1b[0m".format(caption))
         if language in ["cpp", "cc", "c", "h", "hpp"]:
-            processwithcomments(caption, instream, outstream, 'C++')
+            processwithcomments(caption, instream, outstream, 'C++', copy_cpm)
         elif language in ["java", "kt"]:
-            processwithcomments(caption, instream, outstream, 'Java')
+            processwithcomments(caption, instream, outstream, 'Java', copy_cpm)
         elif language == "ps":
             processraw(caption, instream, outstream) # PostScript was added in listings v1.4
         elif language == "raw":
@@ -306,7 +354,7 @@ def main():
         elif language == "sh":
             processraw(caption, instream, outstream, 'bash')
         elif language == "py":
-            processwithcomments(caption, instream, outstream, 'Python')
+            processwithcomments(caption, instream, outstream, 'Python', copy_cpm)
         elif language == "rawpy":
             processraw(caption, instream, outstream, 'Python')
         else:

@@ -1,4 +1,6 @@
-- General library:
+- Architecture:
+	All good for now!
+- Documentation:
 	- Update understanding status of algorithms
 - Algorithms:
 	- DS:
@@ -19,5 +21,5 @@
 		- Fix suffix automaton
 		- Improve Aho
 	- Add test session sample code
-- Structure:
-	- Add time to copy each structure
+- Build infrastructure:
+	All good for now!
