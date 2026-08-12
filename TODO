@@ -1,5 +1,5 @@
 - Architecture:
-	All good for now!
+	- Separate tex from content (including hash.sh)
 - Documentation:
 	All good for now!
 - Algorithms:
@@ -19,8 +19,7 @@
 		- Add Link Cut Tree with Path Queries
 		- Fix HLD with bit_ceil and root != 1
 		- Think about using Arthur's flow implementations (specially because of type flexibility)
-	- Math:
-		- Fix mod sqrt compilation with modpow
-		- Make math algorithms easy to change (mod x double) (e.g. Linear Solver)
+	- String:
+		- Implement a better Aho someday
 - Build infrastructure:
 	All good for now!
