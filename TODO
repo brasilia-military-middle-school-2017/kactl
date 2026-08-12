@@ -1,7 +1,7 @@
 - Architecture:
 	All good for now!
 - Documentation:
-	- Update understanding status of algorithms
+	All good for now!
 - Algorithms:
 	- DS:
 		- Standardize half or closed intervals and update/value order in range queries
@@ -20,6 +20,5 @@
 	- Strings:
 		- Fix suffix automaton
 		- Improve Aho
-	- Add test session sample code
 - Build infrastructure:
 	All good for now!
