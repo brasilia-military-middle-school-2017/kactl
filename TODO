@@ -12,6 +12,7 @@
 	- DP:
 		- Learn DP optimizations ;-;
 	- Graph:
+		- Add Centroid Decomposition
 		- Shorten General Matching
 		- Improve Dominator Tree
 		- Learn TwoCC and BiconnectedComponents
