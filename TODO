@@ -6,6 +6,7 @@
 	- DS:
 		- Standardize half or closed intervals and update/value order in range queries
 		- Fix Dist for n = 1
+		- Add "hole" to BIT implementation
 		- Add other MDRQDS
 		- Add non-lazy versions of Sparse SegTrees
 	- Graph:
