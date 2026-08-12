@@ -9,8 +9,12 @@
 		- Add "hole" to BIT implementation
 		- Add other MDRQDS
 		- Add non-lazy versions of Sparse SegTrees
+	- DP:
+		- Learn DP optimizations ;-;
 	- Graph:
 		- Shorten General Matching
+		- Improve Dominator Tree
+		- Learn TwoCC and BiconnectedComponents
 		- Add Link Cut Tree with Path Queries
 		- Fix HLD with bit_ceil and root != 1
 		- Think about using Arthur's flow implementations (specially because of type flexibility)
