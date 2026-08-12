@@ -7,7 +7,7 @@ help:
 	@echo ""
 	@echo "Available commands are:"
 	@echo "	make fast		- to build KACTL, quickly (only runs LaTeX once)"
-	@echo "	make kactl		- to build KACTL"
+	@echo "	make kactl		- to build KACTL and test-session.pdf"
 	@echo "	make clean		- to clean up the build process"
 	@echo "	make test-compiles	- to test compiling all headers, except those in scrips/skip_headers"
 	@echo "	make help		- to show this information"
