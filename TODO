@@ -10,16 +10,12 @@
 		- Add other MDRQDS
 		- Add non-lazy versions of Sparse SegTrees
 	- Graph:
-		- Update Bellman-Ford to SPFA
 		- Shorten General Matching
 		- Add Link Cut Tree with Path Queries
 		- Fix HLD with bit_ceil and root != 1
-		- Think about using Arthur's flow implementations
+		- Think about using Arthur's flow implementations (specially because of type flexibility)
 	- Math:
 		- Fix mod sqrt compilation with modpow
 		- Make math algorithms easy to change (mod x double) (e.g. Linear Solver)
-	- Strings:
-		- Fix suffix automaton
-		- Improve Aho
 - Build infrastructure:
 	All good for now!
