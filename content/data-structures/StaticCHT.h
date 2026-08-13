@@ -2,7 +2,7 @@
  * Author: Bruno Monteiro
  * Description: static CHT - add must be ordered by slope (a), queries by x.
  * Time: amortized $O(1)$.
- * Status: not tested
+ * Status: tested at CSES
  */
 #pragma once
 
@@ -14,7 +14,7 @@ struct CHT {
 		int sz = a.size();
 		int r = sz-1, m = sz-2, l = sz-3;
 #warning careful with overflow!
-		return (b[l] - b[r])*(a[m] - a[l]) <
+		return (b[l] - b[r])*(a[m] - a[l]) <=
 			(b[l] - b[m])*(a[r] - a[l]);
 	}
 	void add(ll A, ll B){
@@ -26,9 +26,10 @@ struct CHT {
 		}
 		it = min(it, int(a.size()) - 1);
 	}
-	ll get(ll x){
+	ll query(ll x){
+		if (sz(a) == 0)return -oo;
 		while (it+1 < a.size()){
-			if (eval(it+1, x) > eval(it, x)) it++;
+			if (eval(it+1, x) >= eval(it, x)) it++;
 			else break;
 		}
 		return eval(it, x);

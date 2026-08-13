@@ -1,6 +1,7 @@
 /**
  * Author: Arthur Botelho
- * Description: Spec for Seg Beats. It's similar to other data structures.
+ * Description: Spec for Seg Beats. It's similar to other data structures. If id is not contexpr,
+ * declare "BeatsSpec::T BeatsSpec:: id;" globally and initialize "BeatsSpec::id" inside main
  * Time: varies
  * Status: ok
  */
