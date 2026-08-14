@@ -1,47 +1,53 @@
 /**
  * Author: Arthur Botelho
- * Description: Persistent Lazy Sparse Segment Tree
- * Can be changed by modifying Spec
+ * Description: Persistent Lazy Sparse Segment Tree. Call "init" to get the root!
  * Time: O(\log N * (ch + cmp))
- * Status: not stress-tested
+ * Status: tested at Wilson's "hld" problem in Polygon
  */
 
-template<class I, class S> struct LazyPersistentSeg{ //I is index type
-	using T = typename S::T; //value type
-	using L = typename S::L; //lazy type
-	struct Node{int lc, rc; T val; L lz; bool ig;};
-	I n; vector<Node> v;
-	int new_node(int l=0, int r=0){return v.eb(l,r,S::op(v[l].val,v[r].val),L(),1), sz(v)-1;}
-	LazyPersistentSeg(){ //only creates object, should be "init"ed to get root
-		//v.reserve(MXN); //faster node creation
-		v.eb(0,0,S::id,L(),1); //blank node
+template<class I, class S> struct LazyPersistentSeg{
+	using T = typename S::T;
+	using L = typename S::L;
+	I n; vector<int> lc, rc; vector<bool> ig;
+	vector<T> val; vector<L> lz;
+	int new_node(int l, int r){
+		int res = sz(lc);
+		lc.pb(l); rc.pb(r); ig.pb(1);
+		val.pb(S::op(val[l], val[r])); lz.pb(L());
+		return res;
 	}
-	int init(I s){return n = s, new_node();}
-	int lazy_clone(int i, L lz, I lx, I rx){
-		int ni = new_node(v[i].lc, v[i].rc);
-		v[ni].lz = v[i].ig ? lz : S::cmp(v[i].lz, lz); 
-		v[ni].ig = 0; v[ni].val = S::ch(v[i].val, lz, lx, rx);
+	LazyPersistentSeg(){
+		lc.pb(0); rc.pb(0); ig.pb(1);
+		val.pb(S::id); lz.pb(L());
+	}
+	int init(I s){return n = s, new_node(0, 0);}
+	int lazy_clone(int i, L v, I lx, I rx){
+		int ni = new_node(lc[i], rc[i]);
+		lz[ni] = ig[i] ? v : S::cmp(lz[i], v);
+		ig[ni] = 0; val[ni] = S::ch(val[i], v, lx, rx);
 		return ni;
 	}
-	void prop(int i, I lx, I rx){
-		if (v[i].ig)return;
-		int mx = lx + (rx - lx) / 2; v[i].ig = 1;
-		if (lx < rx)
-			v[i].lc = lazy_clone(v[i].lc, v[i].lz, lx, mx),
-			v[i].rc = lazy_clone(v[i].rc, v[i].lz, mx, rx);
+	I prop(int i, I lx, I rx){
+		I mx = lx + (rx - lx) / 2;
+		if (not ig[i]){
+			ig[i] = 1; if (lx < rx)
+			lc[i] = lazy_clone(lc[i], lz[i], lx, mx),
+			rc[i] = lazy_clone(rc[i], lz[i], mx, rx);
+		}
+		return mx;
 	}
-	int update(L lz, I l, I r, int root){return update(lz, l, r, root, 0, n);}
-	int update(L lz, I l, I r, int i, I lx, I rx){
+	int update(L v, I l, I r, int root){return update(v, l, r+1, root, 0, n);}
+	int update(L v, I l, I r, int i, I lx, I rx){
 		if (r <= lx or rx <= l)return i;
-		if (l <= lx and rx <= r)return lazy_clone(i, lz, lx, rx);
-		I mx = lx + (rx - lx) / 2; prop(i, lx, rx);
-		return new_node(update(lz, l, r, v[i].lc, lx, mx), update(lz, l, r, v[i].rc, mx, rx));
+		if (l <= lx and rx <= r)return lazy_clone(i, v, lx, rx);
+		I mx = prop(i, lx, rx);
+		return new_node(update(v, l, r, lc[i], lx, mx), update(v, l, r, rc[i], mx, rx));
 	}
-	T query(I l, I r, int root){return query(l, r, root, 0, n);}
+	T query(I l, I r, int root){return query(l, r+1, root, 0, n);}
 	T query(I l, I r, int i, I lx, I rx){
 		if (r <= lx or rx <= l)return S::id;
-		if (l <= lx and rx <= r)return v[i].val;
-		I mx = lx + (rx - lx) / 2; prop(i, lx, rx);
-		return S::op(query(l, r, v[i].lc, lx, mx), query(l, r, v[i].rc, mx, rx));
+		if (l <= lx and rx <= r)return val[i];
+		I mx = prop(i, lx, rx);
+		return S::op(query(l, r, lc[i], lx, mx), query(l, r, rc[i], mx, rx));
 	}
 };
