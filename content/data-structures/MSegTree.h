@@ -7,7 +7,7 @@
  * Status: stress-tested
  */
 
-#define MAs template<class... As> //multiple arguments
+#define MAs template<class... As>
 template<int D, class S> struct MSegTree{ 
 	using T = typename S::T;
 	int n; vector<MSegTree<D-1, S>> seg;
@@ -30,6 +30,6 @@ template<class S> struct MSegTree<0, S>{
 	using T = typename S::T;
 	T val=S::id;
 	T get(){return val;}
-	void update(T x){val=x;} //set update!
+	void update(T x){val=x;}
 	T query(){return val;}
 };

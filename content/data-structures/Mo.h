@@ -7,22 +7,22 @@
  */
 #pragma once
 
-void add(int ind, int end) { ... } // add a[ind] (end = 0 or 1)
-void del(int ind, int end) { ... } // remove a[ind]
-int calc() { ... } // compute current answer
+void add(int i, int end) { i+=end; }
+void del(int i, int end) { i-=end; }
+int calc() { return 0; }
 
 vi mo(vector<pii> Q) {
-	int L = 0, R = 0, blk = 350; // ~N/sqrt(Q)
+	int L = 0, R = -1, blk = 450; // ~N/sqrt(Q)
 	vi s(sz(Q)), res = s;
 #define K(x) pii(x.first/blk, x.second ^ -(x.first/blk & 1))
 	iota(all(s), 0);
-	sort(all(s), [&](int s, int t){ return K(Q[s]) < K(Q[t]); });
+	sort(all(s), [&](int i, int j){ return K(Q[i]) < K(Q[j]); });
 	for (int qi : s) {
-		pii q = Q[qi];
-		while (L > q.first) add(--L, 0);
-		while (R < q.second) add(R++, 1);
-		while (L < q.first) del(L++, 0);
-		while (R > q.second) del(--R, 1);
+		auto [l, r] = Q[qi];
+		while (L > l) add(--L, 0);
+		while (R < r) add(++R, 1);
+		while (L < l) del(L++, 0);
+		while (R > r) del(R--, 1);
 		res[qi] = calc();
 	}
 	return res;
@@ -43,7 +43,7 @@ vi moTree(vector<array<int, 2>> Q, vector<vi>& ed, int root=0){
 	dfs(root, -1, 0, dfs);
 #define K(x) pii(I[x[0]] / blk, I[x[1]] ^ -(I[x[0]] / blk & 1))
 	iota(all(s), 0);
-	sort(all(s), [&](int s, int t){ return K(Q[s]) < K(Q[t]); });
+	sort(all(s), [&](int a, int b){ return K(Q[a]) < K(Q[b]); });
 	for (int qi : s) rep(end,0,2) {
 		int &a = pos[end], b = Q[qi][end], i = 0;
 #define step(c) { if (in[c]) { del(a, end); in[a] = 0; } \
@@ -57,7 +57,7 @@ vi moTree(vector<array<int, 2>> Q, vector<vi>& ed, int root=0){
 	return res;
 }
 
-vector mo_no_deletion(vector<pii>& qs, int n){
+vector<int> mo_no_deletion(vector<pii>& qs, int n){
 	int q = sz(qs), sq = (int)sqrt(q)+1, blk = (n+sq+1)/sq;
 	vector<vi> o((n+blk-1)/blk);
 	rep(i,0,q)o[qs[i].first/blk].pb(i);
