@@ -4,7 +4,6 @@
 	All good for now!
 - Algorithms:
 	- DS:
-		- Add "hole" to BIT implementation and reconsider 2D
 		- Rewrite and learn Treap
 		- Standardize half or closed intervals and update/value order in range queries
 	- DP:
