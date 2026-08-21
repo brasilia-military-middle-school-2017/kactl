@@ -1,6 +1,6 @@
 /**
  * Author: Arthur Botelho
- * Description: Persistent Lazy Sparse Segment Tree. Call "init" to get the root!
+ * Description: Persistent Lazy Sparse Segment Tree. Call "init" to get the root! Queries also create nodes.
  * Time: O(\log N * (ch + cmp))
  * Status: tested at Wilson's "hld" problem in Polygon
  */
@@ -24,13 +24,13 @@ template<class I, class S> struct LazyPersistentSeg{
 	int lazy_clone(int i, L v, I lx, I rx){
 		int ni = new_node(lc[i], rc[i]);
 		lz[ni] = ig[i] ? v : S::cmp(lz[i], v);
-		ig[ni] = 0; val[ni] = S::ch(val[i], v, lx, rx);
+		ig[ni] = 0; val[ni] = S::ch(val[i], v, lx, rx-1);
 		return ni;
 	}
 	I prop(int i, I lx, I rx){
 		I mx = lx + (rx - lx) / 2;
 		if (not ig[i]){
-			ig[i] = 1; if (lx < rx)
+			ig[i] = 1; if (rx - lx > 1)
 			lc[i] = lazy_clone(lc[i], lz[i], lx, mx),
 			rc[i] = lazy_clone(rc[i], lz[i], mx, rx);
 		}

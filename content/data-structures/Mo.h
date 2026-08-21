@@ -3,7 +3,7 @@
  * Description: Answer interval or tree path queries. Includes interval version without deletion.
  * If values are on tree edges, change \texttt{step} to add/remove the edge $(a, c)$ and remove the initial \texttt{add} call (but keep \texttt{in}).
  * Time: O(N \sqrt Q)
- * Status: stress-tested
+ * Status: tested
  */
 #pragma once
 
@@ -31,7 +31,7 @@ vi mo(vector<pii> Q) {
 vi moTree(vector<array<int, 2>> Q, vector<vi>& ed, int root=0){
 	int N = sz(ed), pos[2] = {}, blk = 350; // ~N/sqrt(Q)
 	vi s(sz(Q)), res = s, I(N), L(N), R(N), in(N), par(N);
-	add(0, 0), in[0] = 1;
+	add(root, 0), in[root] = 1;
 	auto dfs = [&](int x, int p, int dep, auto& f) -> void {
 		par[x] = p;
 		L[x] = N;

@@ -31,7 +31,7 @@ struct BeatsSpec{ //chmin sum
 		return n;
 	}
 	static T ch(T a, L b, int l, int r){
-		if (a.max2 <= b)a.sum -= (ll)(a.max1-b)*a.maxc, a.max1 = b;
+		if (a.max1 > b)a.sum -= (ll)(a.max1-b)*a.maxc, a.max1 = b;
 		return a;
 	}
 	static L cmp(L a, L b){return min(a,b);}

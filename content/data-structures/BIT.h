@@ -1,7 +1,7 @@
 /**
  * Author: Arthur Botelho
  * Description: BIT/Fenwick Tree, requires abelian group (T, id, op, inv).
- * For N = $10^7$, swap n for h(n) and all access bit[i] for bit[h(i)]
+ * For N = $10^7$, allocate h(n)+1 and swap all access bit[i] for bit[h(i)]
  * Time: $O(\log N)$.
  */
 #pragma once

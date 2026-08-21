@@ -1,6 +1,6 @@
 /**
  * Author: Arthur Botelho
- * Description: Lazy Sparse Seg, similar to Lazy Seg (I is index type)
+ * Description: Lazy Sparse Seg, similar to Lazy Seg (I is index type). Queries also create nodes
  * Time: O(\log N * (ch + cmp)).
  * Status: tested at CSES
  */

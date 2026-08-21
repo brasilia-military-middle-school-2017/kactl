@@ -3,6 +3,7 @@
  * Description: Implicit Treap. Dynamic array with insert/erase, lazy
  * range updates, queries and reversals. Ranges are inclusive. Operations are described at the end.
  * S requires T,L,id,op,ch,cmp,rev (what happens to range val when reversed). ch always receives [0,len-1].
+ * Lazy operations must commute with reversions.
  * Time: O(log N) expected per operation.
  */
 #pragma once

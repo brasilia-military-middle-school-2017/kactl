@@ -1,7 +1,7 @@
 /**
  * Author: Arthur Botelho
  * Description: Multidimensional SegTree
- * Requires Monoid (op, id)
+ * Requires commutative Monoid (op, id)
  * Time: O((\log N)^D)
  * Memory: O(N^D)
  * Status: stress-tested

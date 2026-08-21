@@ -2,7 +2,7 @@
  * Author: Arthur Botelho
  * Description: Disjoint Sparse Table
  * Requires Monoid (op, id)
- * Time: O(\log N)
+ * Time: O(1)
  * Memory: O(N \log N)
  * Status: tested at CSES
  */

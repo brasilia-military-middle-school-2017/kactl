@@ -18,6 +18,10 @@ struct CHT {
 			(b[l] - b[m])*(a[r] - a[l]);
 	}
 	void add(ll A, ll B){
+		if(sz(a) && A==a.back()){
+		    if(B<=b.back())return;
+    		a.pop_back(); b.pop_back();
+		}
 		a.push_back(A); b.push_back(B);
 		while (!a.empty()){
 			if ((a.size() < 3) || !useless()) break;

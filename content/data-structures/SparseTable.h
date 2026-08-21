@@ -1,7 +1,7 @@
 /**
  * Author: Arthur Botelho
  * Description: Sparse Table
- * Requires Idempotent Monoid S (op, inv, id)
+ * Requires Idempotent Monoid S (op, id)
  * Time: O(1) query, O(n \log n) build
  * Memory: O(n \log n)
  * Status: stress-tested

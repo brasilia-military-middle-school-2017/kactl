@@ -1,7 +1,7 @@
 /**
  * Author: Arthur Botelho
- * Description: ordered/indexed set and multiset
- * Bad constant factor, works only in Linux
+ * Description: ordered/indexed set and multiset. Bad constant factor, works only in Linux.
+ * All erase/find/search functions assume the target exists.
  * Time: O(\log N) operations
  * Memory: O(N)
  * Status: stress-tested

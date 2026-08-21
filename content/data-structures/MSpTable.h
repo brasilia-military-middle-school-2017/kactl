@@ -3,7 +3,7 @@
  * Description: Multidimensional Sparse Table
  * Requires commutative idempotent monoid (T, id, op)
  * Time: O(2^D)
- * Memory: O(N^D)
+ * Memory: O((N \log N)^D)
  * Status: stress-tested
  */
 #pragma once
