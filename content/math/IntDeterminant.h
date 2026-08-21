@@ -4,13 +4,12 @@
  * Source: somewhere on github
  * Description: Calculates determinant using modular arithmetics.
  * Modulos can also be removed to get a pure-integer version.
- * Time: $O(N^3)$
+ * Time: $O(N^3 \log mod)$
  * Status: bruteforce-tested for N <= 3, mod <= 7
  */
 #pragma once
 
-const ll mod = 12345;
-ll det(vector<vector<ll>>& a) {
+ll det(vector<vector<ll>>& a, ll mod) {
 	int n = sz(a); ll ans = 1;
 	rep(i,0,n) {
 		rep(j,i+1,n) {

@@ -1,21 +1,23 @@
-- Architecture:
-	- Separate tex from content (including hash.sh)
-- Documentation:
+Architecture:
+	Separate tex from content (including hash.sh)
+Documentation:
 	All good for now!
-- Algorithms:
-	- DS:
+Algorithms:
+	DS:
 		All good for now!
-	- DP:
-		- Learn DP optimizations ;-;
-	- Graph:
-		- Add Centroid Decomposition
-		- Shorten General Matching
-		- Improve Dominator Tree
-		- Learn TwoCC and BiconnectedComponents
-		- Add Link Cut Tree with Path Queries
-		- Fix HLD with bit_ceil and root != 1
-		- Think about using Arthur's flow implementations (specially because of type flexibility)
-	- String:
-		- Implement a better Aho someday
-- Build infrastructure:
+	DP:
+		Learn DP optimizations ;-;
+	Math:
+		Add XOR basis?
+	Graph:
+		Add Centroid Decomposition
+		Shorten General Matching
+		Improve Dominator Tree
+		Learn TwoCC and BiconnectedComponents
+		Add Link Cut Tree with Path Queries
+		Fix HLD with bit_ceil and root != 1
+		Think about using Arthur's flow implementations (specially because of type flexibility)
+	String:
+		Implement a better Aho someday
+Build infrastructure:
 	All good for now!

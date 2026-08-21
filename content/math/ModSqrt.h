@@ -11,7 +11,8 @@
 
 #include "ModPow.h"
 const ll p = mod; // mod is p
-ll sqrt(ll a) {
+ll modSqrt(ll a) {
+	if(p==2)return a&1;
 	a %= p; if (a < 0) a += p;
 	if (a == 0) return 0;
 	assert(modpow(a, (p-1)/2) == 1); // else no solution

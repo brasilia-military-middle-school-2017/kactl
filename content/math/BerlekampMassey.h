@@ -6,7 +6,7 @@
  * Description: Recovers any $n$-order linear recurrence relation from the first
  * $2n$ terms of the recurrence.
  * Useful for guessing linear recurrences after brute-forcing the first terms.
- * Should work on any field, but numerical stability for floats is not guaranteed.
+ * The idea should generalize to any field, but numerical stability for floats is not guaranteed.
  * Output will have size $\leq n$.
  * Usage: berlekampMassey({0, 1, 1, 3, 5, 11}) // {1, 2}
  * Time: O(N^2)

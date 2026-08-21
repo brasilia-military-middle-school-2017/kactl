@@ -5,7 +5,7 @@
  * Source: csacademy
  * Description: Transform to a basis with fast convolutions of the form
  * $\displaystyle c[z] = \sum\nolimits_{z = x \oplus y} a[x] \cdot b[y]$,
- * where $\oplus$ is one of AND, OR, XOR. The size of $a$ must be a power of two.
+ * where $\oplus$ is one of AND, OR, XOR. The size of $a$ must be a power of two, and a and b must have the same power-of-two size.
  * Time: O(N \log N)
  * Status: stress-tested
  */
