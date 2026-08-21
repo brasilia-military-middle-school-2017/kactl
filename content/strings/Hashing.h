@@ -3,7 +3,7 @@
  * Description: String hashing (multiple mods and $2^{32}$)
  * Time: O(1) query, O(n) build
  * Memory: O(n)
- * Status: not yet tested
+ * Status: tested
  */
 #pragma once
 
@@ -17,7 +17,7 @@ template<int M, class B> struct A {
 	explicit operator ull() const { return x ^ (ull) b << 21; }
 };
 typedef A<1000000007, A<1000000009, unsigned>> H;
-static int C; // initialize to a number less than MOD or random
+static int C = 9548; // initialize to a number less than MOD or random
 struct HashInterval {
 	int n; vector<H> ha, pw;
 	template<typename S>
@@ -27,6 +27,6 @@ struct HashInterval {
 			ha[i+1] = ha[i] * C + str[i],
 			pw[i+1] = pw[i] * C;
 	}
-	H query(int a, int b) { return ha[b] - ha[a] * pw[b - a]; }
-	H queryI(int a, int b) { return query(n - b, n - a); }
+	H query(int a, int b) { return ha[b+1] - ha[a] * pw[b-a+1]; }
+	H queryI(int a, int b) { return query(n - b - 1, n - a - 1); }
 };

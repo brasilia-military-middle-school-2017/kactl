@@ -1,9 +1,9 @@
 /**
  * Author: Arthur Botelho
  * Description: KMP automaton
- * Time: O(N) build, O(1) query (amortized)
+ * Time: O(N) build, O(N+M) sequential querying
  * Memory: O(N)
- * Status: not tested
+ * Status: tested
 */
 
 struct KMP {
@@ -16,9 +16,9 @@ struct KMP {
 		return P[0]==c;
 	}
 	vector<vector<int>> dfa;
-    void build_dfa(){
+    void build_dfa(){ // uses a-z
 		dfa.assign(n+1, vector<int>(26));
-        dfa[0][P[0]-'a'] = 1; //only way to advance at 0
+        dfa[0][P[0]-'a'] = 1; 
         for(int k = 1; k <= n; k++)
             for(int c = 0; c < 26; c++)
                 if (k < n and P[k] == 'a'+c) dfa[k][c] = k+1;

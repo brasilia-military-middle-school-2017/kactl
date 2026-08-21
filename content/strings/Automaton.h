@@ -1,7 +1,7 @@
 /**
  * Author: Arthur Botelho
  * Description: Suffix automaton with parameterized transition table (can be array or map)
- * Time: O(n) build
+ * Time: O(n * access to G) build
  * Memory: O(n * |G|)
  * Status: tested at CSES and Codeforces
  */
