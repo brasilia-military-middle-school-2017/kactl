@@ -4,8 +4,8 @@
  * License: Unknown
  * Source: https://cp-algorithms.com/geometry/halfplane-intersection.html
  * Description: Calculates the halfplane intersection of Halfplanes, Halfplanes allow everything to the left. 
- * Cuidado com a precisao
- * Time: $O(N \log(N)$
+ * Be careful with precision. Intersects with an artificial [-INF,INF]^2 bounding box.
+ * Time: $O(N \logN)$
  * Status: stress-tested, Submitted on https://codeforces.com/gym/104736/problem/H
  */
 #pragma once
@@ -27,7 +27,7 @@ struct HP {
         return s.p + (s.pq * alpha);
     }
 };
-vector<P> hp_intersect(vector<HP> &H) {
+vector<P> hp_intersect(vector<HP> H) {
     P box[4] = {
         P(INF, INF),
         P(-INF, INF),

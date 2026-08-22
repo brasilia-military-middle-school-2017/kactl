@@ -3,7 +3,7 @@
  * Date: 2019-10-29
  * License: Unknown
  * Source: https://cp-algorithms.com/geometry/minkowski.html
- * Description: Calculates the Minkowski sum of two Polygons in ccw order
+ * Description: Calculates the Minkowski sum of two convex Polygons in ccw order
  * Time: $O(N+M)$
  * Status: stress-tested, Submitted on https://codeforces.com/gym/106252/problem/G
  */
