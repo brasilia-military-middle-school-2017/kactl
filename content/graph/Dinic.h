@@ -50,4 +50,5 @@ struct Dinic {
 		return flow;
 	}
 	bool leftOfMinCut(int a) { return lvl[a] != 0; }
+	void reset(){for(auto& a:adj)for(auto& e:a)e.c=e.oc;}
 };

@@ -11,7 +11,7 @@
 
 #include "HopcroftKarp.h"
 
-vi cover(vector<vi>& g, int n, int m) {
+vi cover(const vector<vi>& g, int n, int m) {
 	vi match(m, -1);
 	int res = hopcroftKarp(g, match);
 	vector<bool> lfound(n, true), seen(m);

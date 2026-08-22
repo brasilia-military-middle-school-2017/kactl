@@ -20,14 +20,13 @@
 
 typedef array<ll, 3> Edge;
 vector<Edge> gomoryHu(int N, vector<Edge> ed) {
-	vector<Edge> tree;
-	vi par(N);
-	rep(i,1,N) {
-		Dinic D(N); // Dinic also works
-		for (Edge t : ed) D.addEdge(t[0], t[1], t[2], t[2]);
-		tree.push_back({i, par[i], D.calc(i, par[i])});
-		rep(j,i+1,N)
-			if (par[j] == par[i] && D.leftOfMinCut(j)) par[j] = i;
+	vector<Edge> tree; vi par(N);
+	Dinic D(N);
+	for(auto [a,b,c]:ed)D.addEdge(a,b,c,c);
+	rep(i,1,N){
+		tree.pb({i,par[i],D.calc(i,par[i])});
+		rep(j,i+1,N)if(par[j]==par[i] && D.leftOfMinCut(j))par[j]=i;
+		D.reset();
 	}
 	return tree;
 }

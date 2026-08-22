@@ -11,7 +11,7 @@
 
 pair<ll,vi> globalMinCut(vector<vector<ll>> a) {
 	int n=sz(a);
-	vi v(n),w(n),vis(n),hd(n),tl(n),nx(n,-1);
+	vi v(n),vis(n),hd(n),tl(n),nx(n,-1); vector<ll> w(n);
 	iota(all(v),0); iota(all(hd),0); tl=hd;
 	ll best=LLONG_MAX; vi side;
 	for(int k=n;k>1;k--) {

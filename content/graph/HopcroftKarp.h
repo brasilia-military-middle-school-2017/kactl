@@ -12,7 +12,7 @@
  */
 #pragma once
 
-int hopcroftKarp(vector<vi>& g, vi& r) {
+int hopcroftKarp(const vector<vi>& g, vi& r) {
 	int n = sz(g), res = 0;
 	vi l(n, -1), q(n), d(n);
 	auto dfs = [&](auto f, int u) -> bool {

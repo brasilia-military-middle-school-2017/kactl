@@ -4,7 +4,7 @@
  * License: CC0
  * Description: Given a rooted tree and a subset S of nodes, compute the minimal
  * subtree that contains all the nodes by adding all (at most $|S|-1$)
- * pairwise LCA's and compressing edges.
+ * pairwise LCA's and compressing edges. S must be non-empty.
  * Returns a list of (par, orig\_index) representing a tree rooted at 0.
  * The root points to itself.
  * Time: $O(|S| \log |S|)$
@@ -12,7 +12,7 @@
  */
 #pragma once
 
-struct LCA {
+struct LCA { // replace in contest!
   vi time;
   int lca(int a, int b) { return -1; }
 };

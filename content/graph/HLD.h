@@ -17,7 +17,7 @@
 template<class S, bool EDGE=false> struct HLD {
 	using T=typename S::T; using L=typename S::L;
 	int n; vi p,siz,hd,ti,hv; SegBeats<S> seg;
-	HLD(vector<vi> g, int r):n(sz(g)),
+	HLD(const vector<vi>& g, int r):n(sz(g)),
 		p(n,-1),siz(n,1),hd(n),ti(n),hv(n,-1),seg(n) {
 		p[r]=r; vi ord={r}; ord.reserve(n);
 		rep(i,0,sz(ord)) for(int f : g[ord[i]])
@@ -41,7 +41,7 @@ template<class S, bool EDGE=false> struct HLD {
 			if(ti[hd[u]] > ti[hd[v]])up(ti[hd[u]],ti[u]),u=p[hd[u]];
 			else down(ti[hd[v]],ti[v]),v=p[hd[v]];
 		if(ti[u] > ti[v])up(ti[v]+EDGE, ti[u]);
-		else  down(ti[u]+EDGE, ti[v]);
+		else  down(ti[u]+EDGE, ti[v]); // may call seg with l > r !
 	}
 	T query(int u, int v) {
 		T a=S::id,b=S::id; process(u, v,
