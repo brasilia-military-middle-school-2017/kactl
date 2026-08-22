@@ -1,32 +1,45 @@
 /**
- * Author: Simon Lindholm
- * Date: 2021-01-09
- * License: CC0
- * Source: https://en.wikipedia.org/wiki/Stoer%E2%80%93Wagner_algorithm
- * Description: Find a global minimum cut in an undirected graph, as represented by an adjacency matrix.
- * Time: O(V^3)
- * Status: Stress-tested together with GomoryHu
+ * Author: Simon Lindholm, modified by ChatGPT
+ * Description: Stoer-Wagner global minimum cut of an undirected weighted
+ * graph given by its adjacency matrix. Returns {cut, one side of the cut}.
+ * Requires nonnegative weights and n >= 2.
+ * Time: O(N^3)
+ * Memory: O(N^2)
+ * Status: stress-tested by GPT
  */
 #pragma once
 
-pair<int, vi> globalMinCut(vector<vi> mat) {
-	pair<int, vi> best = {INT_MAX, {}};
-	int n = sz(mat);
-	vector<vi> co(n);
-	rep(i,0,n) co[i] = {i};
-	rep(ph,1,n) {
-		vi w = mat[0];
-		size_t s = 0, t = 0;
-		rep(it,0,n-ph) { // O(V^2) -> O(E log V) with prio. queue
-			w[t] = INT_MIN;
-			s = t, t = max_element(all(w)) - w.begin();
-			rep(i,0,n) w[i] += mat[t][i];
+pair<ll,vi> globalMinCut(vector<vector<ll>> a) {
+	int n=sz(a);
+	vi v(n),w(n),vis(n),hd(n),tl(n),nx(n,-1);
+	iota(all(v),0); iota(all(hd),0); tl=hd;
+	ll best=LLONG_MAX; vi side;
+	for(int k=n;k>1;k--) {
+		rep(i,0,k) w[v[i]]=vis[v[i]]=0;
+		int s = -1, t = -1, pt = -1;
+		rep(it,0,k) {
+			s = t; t = -1;
+			rep(j,0,k) {
+				int x=v[j];
+				if(!vis[x] && (t<0 || w[x]>w[t]))t=x,pt=j;
+			}
+			if(it==k-1) break;
+			vis[t]=1;
+			rep(j,0,k) {
+				int x=v[j];
+				if(!vis[x]) w[x]+=a[t][x];
+			}
 		}
-		best = min(best, {w[t] - mat[t][t], co[t]});
-		co[s].insert(co[s].end(), all(co[t]));
-		rep(i,0,n) mat[s][i] += mat[t][i];
-		rep(i,0,n) mat[i][s] = mat[s][i];
-		mat[0][t] = INT_MIN;
+		if(w[t]<best) {
+			best=w[t]; side.clear();
+			for(int x=hd[t];x>=0;x=nx[x]) side.pb(x);
+		}
+		nx[tl[s]]=hd[t]; tl[s]=tl[t];
+		rep(j,0,k) {
+			int x=v[j];
+			if(x!=s && x!=t)a[x][s]=a[s][x]+=a[t][x];
+		}
+		v[pt]=v[k-1];
 	}
-	return best;
+	return {best,side};
 }

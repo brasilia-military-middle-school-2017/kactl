@@ -8,17 +8,14 @@ Algorithms:
 	DP:
 		Learn DP optimizations ;-;
 		Move SOS DP from Various
+	Geometry:
+		All good for now!
+	Graph:
+		All good for now!
 	Math:
 		Add XOR basis?
-	Graph:
-		Add Centroid Decomposition
-		Shorten General Matching
-		Improve Dominator Tree
-		Learn TwoCC and BiconnectedComponents
-		Add Link Cut Tree with Path Queries
-		Fix HLD with bit_ceil and root != 1
-		Think about using Arthur's flow implementations (specially because of type flexibility)
 	String:
 		Implement a better Aho someday
 Build infrastructure:
 	Deprecate skip_headers
+	Avoid counting comment block as code (for hash and time estimative)

@@ -3,7 +3,7 @@
  * Description: Functional Graph
  * Time: O(n)
  * Memory: O(n)
- * Status: not yet tested
+ * Status: tested
 */
 
 struct FunctGraph{

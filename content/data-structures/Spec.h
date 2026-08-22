@@ -37,4 +37,5 @@ struct BeatsSpec{ //chmin sum
 	static L cmp(L a, L b){return min(a,b);}
 	static bool brk(L a, T b){return b.max1 <= a;}
 	static bool tag(L a, T b){return b.max2 < a;}
+	static T rev(T a){return a;} // nothing happens when the range is reversed
 };

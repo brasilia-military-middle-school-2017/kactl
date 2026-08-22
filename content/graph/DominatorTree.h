@@ -1,63 +1,68 @@
 /**
- * Author: Ruan Petrus
- * Description: Dominator Tree, creates the graph \texttt{tree}, where all ancestors of a \texttt{u} in the tree 
- * are necessary in the path from the \texttt{root} to \texttt{u}
- * Time: O((n + m)log(n)) build
- * Memory: O(n)
- * Status: not yet tested
+ * Author: ChatGPT
+ * Description: Immediate dominators from root. idom[root]=root and
+ * idom[v]=-1 if v is unreachable. tree() builds the dominator tree on demand.
+ * Time: O((N+M) log N)
+ * Memory: O(N+M)
+ * Status: randomized against brute force
  */
+#pragma once
 
 struct DominatorTree {
-	int n, dfstime;
-	vector<vector<int>> g, gt, tree, bucket, down;
-	vector<int> S,  dsu, label, sdom, idom, id;
-
-	DominatorTree(vector<vector<int>> & _g, int root) 
-	  : n(sz(_g)), dfstime(0), g(_g), gt(n), tree(n), bucket(n), down(n), 
-	  S(n), dsu(n), label(n), sdom(n), idom(n), id(n) {
-		prep(root); reverse(S.begin(), S.begin() + dfstime);
-		for(int u : S) {
-			for(int v : gt[u]) {
-				int w = fnd(v);
-				if(id[ sdom[w] ] < id[ sdom[u] ])
-					sdom[u] = sdom[w];
+	vi idom;
+	DominatorTree(const vector<vi>& g, int root) {
+		int n=sz(g); vi id(n,-1), rev, par;
+		{ // DFS
+			vector<pii> st={{root,0}};
+			id[root]=0; rev.pb(root); par.pb(-1);
+			while(sz(st)) {
+				auto &[u,i]=st.back();
+				if(i==sz(g[u])) { st.pop_back(); continue; }
+				int v=g[u][i++];
+				if(id[v]<0)id[v]=sz(rev),rev.pb(v),par.pb(id[u]),st.pb({v,0});
 			}
-			gt[u].clear();
-			if(u != root) bucket[ sdom[u] ].push_back(u);
-			for(int v : bucket[u]) {
-				int w = fnd(v);
-				if(sdom[w] == sdom[v]) idom[v] = sdom[v];
-				else idom[v] = w;
+		}
+		int N=sz(rev); vi off(N+1);
+		rep(i,0,N)for(int v : g[rev[i]])off[id[v]+1]++;
+		rep(i,1,N+1)off[i]+=off[i-1];
+		vi pre(off[N]);
+		rep(i,0,N)for(int v : g[rev[i]])pre[off[id[v]]++]=i;
+		for(int i=N;i;i--)off[i]=off[i-1];
+		off[0]=0;
+		fill(all(id),-1); // reused as bucket heads
+		vi sd(N),dom(N,-1),dsu(N),lab(N),st;
+		iota(all(sd),0); iota(all(dsu),0); iota(all(lab),0);
+		st.reserve(N);
+		auto fnd = [&](int v) {
+			if(dsu[v]==v) return v;
+			st.clear(); int x=v;
+			while(dsu[x]!=x) st.pb(x),x=dsu[x];
+			int a=st.back();
+			for(int k=sz(st)-1;k--;) {
+				int u=st[k],p=dsu[u];
+				if(sd[lab[p]]<sd[lab[u]]) lab[u]=lab[p];
+				dsu[u]=a;
 			}
-			bucket[u].clear();
-			for(int v : down[u]) dsu[v] = u;
-			down[u].clear();
+			return lab[v];
+		};
+		for(int u=N;u--;) {
+			rep(e,off[u],off[u+1])sd[u]=min(sd[u],sd[fnd(pre[e])]);
+			if(u) dom[u]=id[sd[u]],id[sd[u]]=u;
+			for(int v=id[u];v>=0;) {
+				int nx=dom[v],w=fnd(v);
+				dom[v]=sd[w]==sd[v] ? sd[v] : w;
+				v=nx;
+			}
+			if(u) dsu[u]=par[u];
 		}
-		reverse(S.begin(), S.begin() + dfstime);
-		for(int u : S) if(u != root) {
-			if(idom[u] != sdom[u]) idom[u] = idom[ idom[u] ];
-			tree[ idom[u] ].push_back(u);
-		}
-		idom[root] = root;
+		rep(u,1,N)if(dom[u]!=sd[u])dom[u]=dom[dom[u]];
+		fill(all(id),-1); id[root]=root;
+		rep(u,1,N) id[rev[u]]=rev[dom[u]];
+		idom=move(id);
 	}
-	void prep(int u){
-		S[dfstime] = u;
-		id[u] = ++dfstime;
-		label[u] = sdom[u] = dsu[u] = u;
-
-		for(int v : g[u]){
-			if(!id[v])
-				prep(v), down[u].push_back(v);
-			gt[v].push_back(u);
-		}
+	vector<vi> tree() const {
+		vector<vi> t(sz(idom));
+		rep(v,0,sz(idom))if(idom[v]>=0 && idom[v]!=v)t[idom[v]].pb(v);
+		return t;
 	}
-	int fnd(int u, int flag = 0){
-		if(u == dsu[u]) return u;
-		int v = fnd(dsu[u], 1), b = label[ dsu[u] ];
-		if(id[ sdom[b] ] < id[ sdom[ label[u] ] ])
-			label[u] = b;
-		dsu[u] = v;
-		return flag ? v : label[u];
-	}
-
 };

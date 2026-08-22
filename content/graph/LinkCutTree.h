@@ -1,100 +1,84 @@
 /**
- * Author: Simon Lindholm
- * Date: 2016-07-25
- * Source: https://github.com/ngthanhtrung23/ACM_Notebook_new/blob/master/DataStructure/LinkCutTree.h
- * Description: Represents a forest of unrooted trees. You can add and remove
- * edges (as long as the result is still a forest), and check whether
- * two nodes are in the same tree.
- * Time: All operations take amortized O(\log N).
- * Status: Stress-tested a bit for N <= 20
+ * Author: ChatGPT
+ * Description: Link-Cut Tree for a dynamic forest. Supports link/cut,
+ * connectivity, point set and path queries. Nodes are internally represented as 1-based, API is 0-based.
+ * S requires T, id, op and rev. query(u,v) follows path order u to v.
+ * Store edge values by creating an extra node for each edge.
+ * Time: O(\log N) amortized per operation.
+ * Memory: O(N).
  */
 #pragma once
 
-struct Node { // Splay tree. Root's pp contains tree's parent.
-	Node *p = 0, *pp = 0, *c[2];
-	bool flip = 0;
-	Node() { c[0] = c[1] = 0; fix(); }
-	void fix() {
-		if (c[0]) c[0]->p = this;
-		if (c[1]) c[1]->p = this;
-		// (+ update sum of subtree elements etc. if wanted)
+template<class S> struct LCT {
+	using T=typename S::T;
+	struct N {
+		int p=0,c[2]={}; T v=S::id,ac=S::id; bool rev=0;
+		N(T V=S::id):v(V),ac(V){}
+	};
+	vector<N> t; vi st;
+	LCT(int n=0):t(n+1){st.reserve(n+1);}
+	LCT(vector<T> a):t(1){
+		for(T v:a)t.eb(v);
+		st.reserve(sz(t));
 	}
-	void pushFlip() {
-		if (!flip) return;
-		flip = 0; swap(c[0], c[1]);
-		if (c[0]) c[0]->flip ^= 1;
-		if (c[1]) c[1]->flip ^= 1;
+	int node(T v=S::id){return t.eb(v), sz(t)-2;} // returns 0-based id
+	bool root(int x){
+		int p=t[x].p;
+		return !p || (t[p].c[0]!=x && t[p].c[1]!=x);
 	}
-	int up() { return p ? p->c[1] == this : -1; }
-	void rot(int i, int b) {
-		int h = i ^ b;
-		Node *x = c[i], *y = b == 2 ? x : x->c[h], *z = b ? y : x;
-		if ((y->p = p)) p->c[up()] = y;
-		c[i] = z->c[i ^ 1];
-		if (b < 2) {
-			x->c[h] = y->c[h ^ 1];
-			y->c[h ^ 1] = x;
-		}
-		z->c[i ^ 1] = this;
-		fix(); x->fix(); y->fix();
-		if (p) p->fix();
-		swap(pp, y->pp);
+	void pull(int x){
+		t[x].ac=S::op(S::op(t[t[x].c[0]].ac,t[x].v), t[t[x].c[1]].ac);
 	}
-	void splay() { /// Splay this up to the root. Always finishes without flip set.
-		for (pushFlip(); p; ) {
-			if (p->p) p->p->pushFlip();
-			p->pushFlip(); pushFlip();
-			int c1 = up(), c2 = p->up();
-			if (c2 == -1) p->rot(c1, 2);
-			else p->p->rot(c2, c1 != c2);
-		}
+	void push(int x){
+		if(t[x].rev) flip(t[x].c[0]),flip(t[x].c[1]),t[x].rev=0;
 	}
-	Node* first() { /// Return the min element of the subtree rooted at this, splayed to the top.
-		pushFlip();
-		return c[0] ? c[0]->first() : (splay(), this);
+	void flip(int x){
+		if(!x)return;
+		swap(t[x].c[0],t[x].c[1]);
+		t[x].ac=S::rev(t[x].ac); t[x].rev^=1;
 	}
-};
-struct LinkCut {
-	vector<Node> node;
-	LinkCut(int N) : node(N) {}
-	void link(int u, int v) { // add an edge (u, v)
-		assert(!connected(u, v));
-		makeRoot(&node[u]);
-		node[u].pp = &node[v];
+	void rot(int x){
+		int p=t[x].p,g=t[p].p,d=t[p].c[1]==x,b=t[x].c[d^1];
+		if(!root(p))t[g].c[t[g].c[1]==p]=x;
+		t[x].p=g; t[x].c[d^1]=p; t[p].p=x;
+		t[p].c[d]=b; if(b)t[b].p=p;
+		pull(p); pull(x);
 	}
-	void cut(int u, int v) { // remove an edge (u, v)
-		Node *x = &node[u], *top = &node[v];
-		makeRoot(top); x->splay();
-		assert(top == (x->pp ?: x->c[0]));
-		if (x->pp) x->pp = 0;
-		else {
-			x->c[0] = top->p = 0;
-			x->fix();
+	void splay(int x){
+		int y=x; st.clear(); st.pb(y);
+		while(!root(y))st.pb(y=t[y].p);
+		while(sz(st))push(st.back()),st.pop_back();
+		while(!root(x)){
+			int p=t[x].p,g=t[p].p;
+			if(!root(p))rot((t[p].c[0]==x)==(t[g].c[0]==p)?p:x);
+			rot(x);
 		}
 	}
-	bool connected(int u, int v) { // are u, v in the same tree?
-		Node* nu = access(&node[u])->first();
-		return nu == access(&node[v])->first();
-	}
-	void makeRoot(Node* u) { /// Move u to root of represented tree.
-		access(u);
-		u->splay();
-		if(u->c[0]) {
-			u->c[0]->p = 0;
-			u->c[0]->flip ^= 1;
-			u->c[0]->pp = u;
-			u->c[0] = 0;
-			u->fix();
+	int access(int x){
+		int last=0;
+		for(int y=x;y;y=t[y].p){
+			splay(y); t[y].c[1]=last;
+			pull(y); last=y;
 		}
+		splay(x); return last;
 	}
-	Node* access(Node* u) { /// Move u to root aux tree. Return the root of the root aux tree.
-		u->splay();
-		while (Node* pp = u->pp) {
-			pp->splay(); u->pp = 0;
-			if (pp->c[1]) {
-				pp->c[1]->p = 0; pp->c[1]->pp = pp; }
-			pp->c[1] = u; pp->fix(); u = pp;
-		}
-		return u;
+	void rootify(int x){ access(x); flip(x); }
+	int findRoot(int x){
+		access(x); while(push(x),t[x].c[0])x=t[x].c[0];
+		splay(x); return x;
+	}
+	bool connected(int a,int b){ a++; b++; return a==b || findRoot(a)==findRoot(b); }
+	void link(int a,int b){
+		a++; b++; rootify(a);
+		assert(findRoot(b)!=a); t[a].p=b;
+	}
+	void cut(int a,int b){
+		a++; b++; rootify(a); access(b);
+		assert(t[b].c[0]==a && !t[a].c[1]);
+		t[b].c[0]=t[a].p=0; pull(b);
+	}
+	void set(int x,T v){ x++; access(x);t[x].v=v; pull(x); }
+	T query(int a,int b){
+		a++; b++; rootify(a); access(b); return t[b].ac;
 	}
 };
