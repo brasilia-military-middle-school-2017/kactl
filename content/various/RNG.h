@@ -6,14 +6,9 @@
  */
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count()); // mt19937_64
-void example(){
-    int n; cin >> n;
-    uniform_int_distribution<int> distribution(1,n);
-    int num = distribution(rng); // num no range [1, n]
-    vector<int> vec(n);
-    iota(vec.begin(), vec.end(), 1);
-    shuffle(vec.begin(), vec.end(), rng); // shuffle
-}
+// uniform_int_distribution<int> distribution(1,n);
+// int num = distribution(rng); // num no range [1, n]
+// shuffle(vec.begin(), vec.end(), rng); // shuffle
 
 using ull = unsigned long long;
 ull mix(ull o){

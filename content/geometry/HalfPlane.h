@@ -4,8 +4,8 @@
  * License: Unknown
  * Source: https://cp-algorithms.com/geometry/halfplane-intersection.html
  * Description: Calculates the halfplane intersection of Halfplanes, Halfplanes allow everything to the left. 
- * Be careful with precision. Intersects with an artificial [-INF,INF]^2 bounding box.
- * Time: $O(N \logN)$
+ * Be careful with precision. Intersects with an artificial $[-INF,INF]^2$ bounding box.
+ * Time: $O(N \log N)$
  * Status: stress-tested, Submitted on https://codeforces.com/gym/104736/problem/H
  */
 #pragma once

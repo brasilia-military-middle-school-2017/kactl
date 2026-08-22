@@ -24,7 +24,7 @@ magic flux $F=b^2+d^2-a^2-c^2$:
 \[ 4A = 2ef \cdot \sin\theta = F\tan\theta = \sqrt{4e^2f^2-F^2} \]
 
  For cyclic quadrilaterals the sum of opposite angles is $180^\circ$,
-$ef = ac + bd$, and $A = \sqrt{(p-a)(p-b)(p-c)(p-d)}$.
+$ef = ac + bd$, and $A = \sqrt{(p-a)(p-b)(p-c)(p-d)}$ ($p$ is semiperimeter).
 
 \section{Combinatorics}
 
@@ -61,7 +61,7 @@ $ef = ac + bd$, and $A = \sqrt{(p-a)(p-b)(p-c)(p-d)}$.
 
 		Sums of powers:
 		\small
-		\[ \sum_{i=1}^n n^m = \frac{1}{m+1} \sum_{k=0}^m \binom{m+1}{k} B_k \cdot (n+1)^{m+1-k} \]
+		\[ \sum_{i=1}^n i^m = \frac{1}{m+1} \sum_{k=0}^m \binom{m+1}{k} B_k \cdot (n+1)^{m+1-k} \]
 		\normalsize
 
 		Euler-Maclaurin formula for infinite sums:
@@ -76,11 +76,11 @@ $ef = ac + bd$, and $A = \sqrt{(p-a)(p-b)(p-c)(p-d)}$.
 			&c(n,k) = c(n-1,k-1) + (n-1) c(n-1,k),\ c(0,0) = 1 \\
 			&\textstyle \sum_{k=0}^n c(n,k)x^k = x(x+1) \ldots (x+n-1)
 		\end{align*}
-		$c(8,k) = 8, 0, 5040, 13068, 13132, 6769, 1960, 322, 28, 1$ \\
+		$c(8,k) = 0, 5040, 13068, 13132, 6769, 1960, 322, 28, 1$ \\
 		$c(n,2) = 0, 0, 1, 3, 11, 50, 274, 1764, 13068, 109584, \ldots$
 
 	\subsubsection{Eulerian numbers}
-		Number of permutations $\pi \in S_n$ in which exactly $k$ elements are greater than the previous element. $k$ $j$:s s.t. $\pi(j)>\pi(j+1)$, $k+1$ $j$:s s.t. $\pi(j)\geq j$, $k$ $j$:s s.t. $\pi(j)>j$.
+		Number of permutations of $n$ elements with exactly $k$ descents (equivalently, $k$ ascents or $k$ excedances).
 		$$E(n,k) = (n-k)E(n-1,k-1) + (k+1)E(n-1,k)$$
 		$$E(n,0) = E(n,n-1) = 1$$
 		$$E(n,k) = \sum_{j=0}^k(-1)^j\binom{n+1}{j}(k+1-j)^n$$
@@ -98,26 +98,37 @@ $ef = ac + bd$, and $A = \sqrt{(p-a)(p-b)(p-c)(p-d)}$.
 
 \section{Number Theory}
 
-\subsection{Highly composite numbers}
-Up to: number of divisors (number itself)
+\subsection{Maximum number of divisors}
+Maximum $\tau(n)$ for $n\le N$; last column gives one such $n$.
 
-$$10^2: 12 \ (60)$$
-$$10^3: 32 \ (840)$$
-$$10^4: 64 \ (7560)$$
-$$10^5: 128 \ (83160)$$
-$$10^6: 240 \ (720720)$$
-$$10^7: 448 \ (8648640)$$
-$$10^8: 768 \ (73513440)$$
-$$10^9: 1344 \ (735134400)$$
-$$10^{10}: 2304 \ (6983776800)$$
-$$10^{11}: 4032 \ (97772875200)$$
-$$10^{12}: 6720 \ (963761198400)$$
-$$10^{13}: 10752 \ (9316358251200)$$
-$$10^{14}: 17280 \ (97821761637600)$$
-$$10^{15}: 26880 \ (866421317361600)$$
-$$10^{16}: 41472 \ (8086598962041600)$$
-$$10^{17}: 64512 \ (74801040398884800)$$
-$$10^{18}: 103680 \ (897612484786617600)$$
+\begin{center}
+\scriptsize
+\begin{tabular}{r|r|r}
+$N$ & $\tau$ & $n$ \\ \hline
+$10^2$ & 12 & 60 \\
+$10^3$ & 32 & 840 \\
+$10^4$ & 64 & 7560 \\
+$10^5$ & 128 & 83160 \\
+$10^6$ & 240 & 720720 \\
+$10^7$ & 448 & 8648640 \\
+$10^8$ & 768 & 73513440 \\
+$10^9$ & 1344 & 735134400
+\end{tabular}
+\qquad
+\begin{tabular}{r|r|r}
+$N$ & $\tau$ & $n$ \\ \hline
+$10^{10}$ & 2304 & 6983776800 \\
+$10^{11}$ & 4032 & 97772875200 \\
+$10^{12}$ & 6720 & 963761198400 \\
+$10^{13}$ & 10752 & 9316358251200 \\
+$10^{14}$ & 17280 & 97821761637600 \\
+$10^{15}$ & 26880 & 866421317361600 \\
+$10^{16}$ & 41472 & 8086598962041600 \\
+$10^{17}$ & 64512 & 74801040398884800 \\
+$10^{18}$ & 103680 & 897612484786617600
+\end{tabular}
+\normalsize
+\end{center}
 
 
  \section{Graphs}

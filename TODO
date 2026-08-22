@@ -7,6 +7,7 @@ Algorithms:
 		All good for now!
 	DP:
 		Learn DP optimizations ;-;
+		Move SOS DP from Various
 	Math:
 		Add XOR basis?
 	Graph:
@@ -20,4 +21,4 @@ Algorithms:
 	String:
 		Implement a better Aho someday
 Build infrastructure:
-	All good for now!
+	Deprecate skip_headers

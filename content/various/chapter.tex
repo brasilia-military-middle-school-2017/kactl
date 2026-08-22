@@ -17,7 +17,7 @@
 		\end{itemize}
 	\subsection{Pragmas}
 		\begin{itemize}
-			\item \lstinline{#pragma GCC optimize ("Ofast")} will make GCC auto-vectorize loops and optimizes floating points better.
-			\item \lstinline{#pragma GCC target ("avx2")} can double performance of vectorized code, but causes crashes on old machines.
-			\item \lstinline{#pragma GCC optimize ("bmi,bmi2,lzcnt,popcnt")} are good for bitsets.
+			\item \lstinline{#pragma GCC optimize("Ofast")} will make GCC auto-vectorize loops and aggressively optimize floating points.
+			\item \lstinline{#pragma GCC target("avx2")} can improve performance of vectorized code, but causes crashes on old machines.
+			\item \lstinline{#pragma GCC target("bmi,bmi2,lzcnt,popcnt")} are good for bitsets.
 		\end{itemize}
