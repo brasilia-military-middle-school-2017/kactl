@@ -4,16 +4,16 @@ Documentation:
 	All good for now!
 Algorithms:
 	DS:
-		All good for now!
+		Add O(SQRT) + O(1) structures
 	DP:
-		Learn DP optimizations ;-;
 		Move SOS DP from Various
+		Learn DP optimizations ;-;
 	Geometry:
 		All good for now!
 	Graph:
-		Update LCA for Compress Tree?
+		Update LCA for Compress Tree later
 	Math:
-		Add XOR basis?
+		All good for now!
 	String:
 		Implement a better Aho someday
 Build infrastructure:
