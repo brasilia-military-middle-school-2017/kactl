@@ -37,7 +37,9 @@ def estimate_copy_seconds(source, copy_cpm):
 
     # len(source) intentionally counts line breaks as one input action.
     # Generated hashes have not been inserted yet when this is called.
-    return 60.0 * len(source) / copy_cpm
+    raw_minutes = len(source) / copy_cpm
+    seconds = 60 * 1.28 * raw_minutes ** 1.06 # by GPT
+    return seconds
 
 
 def format_copy_time(seconds):
