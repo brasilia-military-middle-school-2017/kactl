@@ -18,3 +18,4 @@ Algorithms:
 Build infrastructure:
 	Deprecate skip_headers
 	Avoid counting comment block as code (for hash and time estimative)
+	Fix GHA
