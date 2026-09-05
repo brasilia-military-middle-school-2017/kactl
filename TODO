@@ -10,12 +10,13 @@ Algorithms:
 	Geometry:
 		All good for now!
 	Graph:
-		Update LCA for Compress Tree later
+		Update LCA for Compress Tree
 	Math:
 		All good for now!
 	String:
-		Implement a better Aho someday
+		Implement a better Aho
 Build infrastructure:
 	Deprecate skip_headers
 	Avoid counting comment block as code (for hash and time estimative)
 	Fix GHA
+	Make itemize compact
