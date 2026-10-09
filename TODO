@@ -16,6 +16,8 @@ Algorithms:
 	String:
 		Implement a better Aho
 		Add Suffix Automaton on Trie
+	Various:
+		Add constructive permutation iteration (summer school problem)
 Build infrastructure:
 	Deprecate skip_headers
 	Avoid counting comment block as code (for hash and time estimative)
