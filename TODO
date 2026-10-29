@@ -4,7 +4,7 @@ Documentation:
 	All good for now!
 Algorithms:
 	DS:
-		State of art!
+		Add log structures decomposition template
 	DP:
 		Learn DP optimizations ;-;
 	Geometry:
@@ -15,6 +15,9 @@ Algorithms:
 		All good for now!
 	String:
 		Implement a better Aho
+		Add Suffix Automaton on Trie
+	Various:
+		Add constructive permutation iteration (summer school problem)
 Build infrastructure:
 	Deprecate skip_headers
 	Avoid counting comment block as code (for hash and time estimative)
