@@ -14,7 +14,6 @@ Algorithms:
 	Math:
 		All good for now!
 	String:
-		Implement a better Aho
 		Add Suffix Automaton on Trie
 	Various:
 		Add constructive permutation iteration (summer school problem)

@@ -1,54 +1,42 @@
 /**
- * Author: CP-ALGO
- * Description: Aho-Corasick
- * Time: O(n) build
- * Memory: O(n * 26)
+ * Author: Arthur Botelho
+ * Description: Aho-Corasick. G is the graph type (usually array<int, 26> or map<char, int>)
+ *  and C is the graph index type. nb is the vertex of the next existing suffix in the trie,
+ *  and rnb is the next suffix that is an input string. Remember that rnb tree has depth sqrt.
+ *  term marks if is input string. add function retuns the index of vertex for that string, the
+ *  mapping between vertices and string, including repetitions, is done by the user, not the API.
+ *  0 is the initial state and also the link tree root.
+ * Time: O(N * 26) build, where N is the sum of sizes of strings
+ * Memory: O(N * |G|))
  * Status: not yet tested
  */
-const int K = 26;
-struct Vertex {
-    int next[K];
-    bool output = false;
-    int p = -1;
-    char pch;
-    int link = -1;
-    int go[K];
 
-    Vertex(int _p=-1, char ch='$') : p(_p), pch(ch) {
-        fill(begin(next), end(next), -1);
-        fill(begin(go), end(go), -1);
+template<class C, class G> struct Aho {
+    vector<G> trie, aut;
+    vector<int> nb, rnb;
+    vector<bool> term; //reserve 1 + sum of |s|
+    Aho(): trie(1), aut(1), nb(1), rnb(1), term(1) {}
+    int new_node(){
+		trie.eb(); aut.eb(); nb.eb(); rnb.eb(); term.eb();
+        return sz(trie)-1;
+    }
+    template<class S> int add(S& str){
+        int v = 0;
+        for(C c : str)
+            if (trie[v][c])v = trie[v][c];
+            else v = trie[v][c] = new_node();
+        return term[v] = 1, v;
+    }
+    void build(){
+        queue<int> bfs; bfs.push(0);
+        while(not bfs.empty()){
+            int v = bfs.front(), u = nb[v]; 
+            rnb[v] = term[u] ? u : rnb[u]; bfs.pop();
+            for(C c = 0; c < 26; c++){ // iterate trie edges
+                int f = trie[v][c], uf = aut[u][c];
+                if (f)aut[v][c] = f, nb[f] = uf, bfs.push(f);
+                else aut[v][c] = uf;
+            }
+        }
     }
 };
-
-vector<Vertex> t(1);
-
-void add_string(string const& s) {
-    int v = 0;
-    for (char ch : s) {
-        int c = ch - 'a';
-        if (t[v].next[c] == -1) {
-            t[v].next[c] = sz(t);
-            t.eb(v, ch);
-        }
-        v = t[v].next[c];
-    }
-    t[v].output = true;
-}
-
-int go(int v, char ch);
-int get_link(int v) {
-    if (t[v].link == -1) {
-        if (v == 0 || t[v].p == 0) t[v].link = 0;
-        else t[v].link = go(get_link(t[v].p), t[v].pch);
-    }
-    return t[v].link;
-}
-
-int go(int v, char ch) {
-    int c = ch - 'a';
-    if (t[v].go[c] == -1) {
-        if (t[v].next[c] != -1) t[v].go[c] = t[v].next[c];
-        else t[v].go[c] = v == 0 ? 0 : go(get_link(v), ch);
-    }
-    return t[v].go[c];
-}
