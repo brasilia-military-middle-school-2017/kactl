@@ -7,7 +7,7 @@
  *  mapping between vertices and string, including repetitions, is done by the user, not the API.
  *  0 is the initial state and also the link tree root.
  * Time: O(N * 26) build, where N is the sum of sizes of strings
- * Memory: O(N * |G|))
+ * Memory: O(N * |G|)
  * Status: not yet tested
  */
 
