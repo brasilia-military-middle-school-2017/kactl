@@ -8,7 +8,7 @@
  *  0 is the initial state and also the link tree root.
  * Time: O(N * 26) build, where N is the sum of sizes of strings
  * Memory: O(N * |G|)
- * Status: not yet tested
+ * Status: tested at Codeforces
  */
 
 template<class C, class G> struct Aho {
